@@ -250,6 +250,278 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://zyad86.g  ithub.io/2017/07/22/YetAnotherDownloadingMethod/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ericyz-zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zyad86-Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/22/YetAnotherDownloadingMethod/" itemprop="url">
+                  YetAnotherDownloadingMethod
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-22T16:36:47+08:00">
+                2017-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="一些造好的轮子"><a href="#一些造好的轮子" class="headerlink" title="一些造好的轮子"></a>一些造好的轮子</h1><p>科技改变生活</p>
+<p>几个很好用的工具推荐及一些基本的使用方法：</p>
+<h2 id="YOU-GET"><a href="#YOU-GET" class="headerlink" title="YOU-GET"></a>YOU-GET</h2><p><a href="https://github.com/soimort/you-get" target="_blank" rel="external">You-Get</a>是一个基于Python3的下载工具。使用You-Get可以很轻松的下载网上的视频，图片，音乐。</p>
+<blockquote>
+<p>项目主页：<a href="https://github.com/soimort/you-get" target="_blank" rel="external">https://github.com/soimort/you-get</a><br>You-Get 主页：<a href="https://you-get.org/" target="_blank" rel="external">https://you-get.org/</a><br>You-Get 原版中文说明：<a href="https://github.com/soimort/you-get/wiki/中文说明/" target="_blank" rel="external">https://github.com/soimort/you-get/wiki/中文说明/</a><br>作者：<a href="https://github.com/soimort" target="_blank" rel="external">soimort</a></p>
+</blockquote>
+<p>需要的环境：</p>
+<pre><code>Python3  推荐Python3.5.1
+pip install you-get
+Or pip3 install you-get    
+</code></pre><p>&gt;<br>Python的安装方式：<a href="https://www.python.org/downloads/" target="_blank" rel="external">官网</a><br>相关bilibili分p整合下载的脚本：<a href="https://gist.github.com/Sg4Dylan/94565e6629792264ba0b22ff707e088c" target="_blank" rel="external">GayHub链接</a></p>
+<p>命令行输入you-get 测试是否安装成功</p>
+<p>You-Get 最基本的使用方法 直接是命令 you-get  url<br>若是要使用上述脚本  you-get xx.py url num<br>其中xx.py 为自行命名内容为<a href="https://gist.github.com/Sg4Dylan/94565e6629792264ba0b22ff707e088c" target="_blank" rel="external">GayHub链接</a>的脚本内容，num为BiliBili链接的分P数</p>
+<p>这个我主要用来下载国内网站的视频，比如b站，配合一些已有人写好的脚本，下一些分p的视频很是方便，想下很多视频的时候也可以自己写个小的脚本保存某个收藏夹然后批量下载</p>
+<h4 id="还是很好用的"><a href="#还是很好用的" class="headerlink" title="还是很好用的"></a>还是很好用的</h4><h2 id="Youtube-dl"><a href="#Youtube-dl" class="headerlink" title="Youtube-dl"></a>Youtube-dl</h2><h3 id="Mac用户直接-brew-install-youtube-dl"><a href="#Mac用户直接-brew-install-youtube-dl" class="headerlink" title="Mac用户直接 brew install youtube-dl"></a>Mac用户直接 brew install youtube-dl</h3><h3 id="FFmpeg也是直接brew-install-ffmpeg-很是方便"><a href="#FFmpeg也是直接brew-install-ffmpeg-很是方便" class="headerlink" title="FFmpeg也是直接brew install ffmpeg 很是方便"></a>FFmpeg也是直接brew install ffmpeg 很是方便</h3><blockquote>
+<p>Youtube-dl    ： <a href="http://rg3.github.io/youtube-dl/" target="_blank" rel="external">官方链接</a><br>FFmpeg    : <a href="https://ffmpeg.org" target="_blank" rel="external">官网链接</a></p>
+</blockquote>
+<p>由于中国局域网的存在可能会安装失败，连接不上，可以加上命令行全局代理（如果你开了ss的话）  </p>
+<pre><code>export ALL_PROXY=socks5://127.0.0.1:1080
+</code></pre><p>不过这段代码的作用期只是暂时的，不过也足够下载下来软件了</p>
+<p>具体的使用方式用的最多的就是：  </p>
+<pre><code>youtube-dl URL
+youtube-dl -F URL
+youtube-dl -f xxx+xxx URL
+</code></pre><p>代理开自动，需要加上这么一个参数 </p>
+<pre><code>--proxy socks5://127.0.0.1:1080 
+</code></pre><p>加在youtube-dl后面<br>所以下载一个视频时最多的时候直接youtube-dl+URL就可以直接下载最高品质的视频源了，如果想下载4k的先-F分析一下，在-f加上视频流和音频流 之后会自动使用ffmpeg合并的。</p>
+<p>其他安装方法请参照官网均有说明</p>
+<blockquote>
+<p>Reference:<br><a href="http://www.jianshu.com/p/a3f8df948395" target="_blank" rel="external">You-Get——基于Python3的媒体下载工具-Login926</a><br><a href="https://lolicon.link/2016/08/07/yet-another-method-to-download-video-from-bilibili/" target="_blank" rel="external">一种批量下载Bilibili视频的方法-SyDylan</a><br>//作者取名的方式很有意思 很像yacc这类啊   </p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://zyad86.g  ithub.io/2017/05/09/Hbase-install-configuration/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ericyz-zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zyad86-Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/09/Hbase-install-configuration/" itemprop="url">
+                  Hbase install & configuration
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T15:37:46+08:00">
+                2017-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Hbase-安装配置"><a href="#Hbase-安装配置" class="headerlink" title="Hbase 安装配置"></a>Hbase 安装配置</h1><blockquote>
+<p>原先配置环境  hadoop 2.7.3  redhat 7.3</p>
+</blockquote>
+<h2 id="1-Hbase单机配置"><a href="#1-Hbase单机配置" class="headerlink" title="1. Hbase单机配置"></a>1. Hbase单机配置</h2>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://zyad86.g  ithub.io/2017/04/20/lab-redhat-hadoop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -768,7 +1040,7 @@ cat ./output/*
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -781,7 +1053,7 @@ cat ./output/*
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
