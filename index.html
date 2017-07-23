@@ -250,6 +250,337 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://zyad86.g  ithub.io/2017/07/23/Hadoop-JinYongArena/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ericyz-zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zyad86-Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/23/Hadoop-JinYongArena/" itemprop="url">
+                  Hadoop-JinYongArena
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-23T17:45:22+08:00">
+                2017-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="用Hadoop分析金庸人物关系网"><a href="#用Hadoop分析金庸人物关系网" class="headerlink" title="用Hadoop分析金庸人物关系网"></a>用Hadoop分析金庸人物关系网</h1><p>— 用大数据粗略的分析金庸人物关系网</p>
+<h2 id="整体结果报告"><a href="#整体结果报告" class="headerlink" title="整体结果报告"></a>整体结果报告</h2><p>达到预期目标并完成了选做内容<br><img src="https://github.com/zyad86/JinYongArena/blob/master/wiki-src/Gephi-OverAll.jpg?raw=true" alt="Gephi-OverAll"></p>
+<h3 id="实验目标描述："><a href="#实验目标描述：" class="headerlink" title="实验目标描述："></a>实验目标描述：</h3><blockquote>
+<p>金庸的江湖<br>课程设计目标<br>通过一个综合数据分析案例：”金庸的江湖–金庸武侠小说中的任务关系挖掘“，来学习和掌握MapReduce程序设计。通过本课程设计的学习，可以体会如何使用MapReduce完成一个综合性的数据挖掘任务，包括全流程的数据预处理、数据分析、数据后处理等。<br>涉及的编程技能：<br>1.Hadoop中使用第三发JAR包辅助分析<br>2.掌握简单的MapReduce算法设计:<br>   a) 单词同现算法；<br>   b) 数据整理与归一化算法<br>    c) 数据排序（选做）<br>3.掌握带有迭代特性的MapReduce算法设计:<br>    a) PageRank算法<br>    b) 标签传播（Label Propagation）算法（选座）<br>…etc  具体见课程设计要求</p>
+</blockquote>
+<h2 id="编写环境"><a href="#编写环境" class="headerlink" title="编写环境"></a>编写环境</h2><p>编写环境:        VMware WorkStation 11 Ubuntu  Hadoop 2.7.1 IDEA<br>测试编译环境:    macOS Sierra 10.12.6 IDEA 2017<br>实际运行集群:    南京大学计算机系pasa大数据集群<br>编译依赖包:<br><a href="https://oss.sonatype.org/content/repositories/releases/org/ansj/ansj_seg/" target="_blank" rel="external">ansj_seg-5.1.3.jar</a><br><a href="https://oss.sonatype.org/content/repositories/releases/org/nlpcn/nlp-lang/" target="_blank" rel="external">nlp-lang-1.7.3.jar</a><br><a href="https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.7.1/" target="_blank" rel="external">hadoop-common-2.7.1.jar</a><br><a href="https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.7.1/" target="_blank" rel="external">hadoop-dfs-2.7.1.jar</a><br><a href="https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.7.1/" target="_blank" rel="external">hadoop-mapreduce-client-core-2.7.1.jar</a></p>
+<p><img src="https://github.com/zyad86/JinYongArena/blob/master/wiki-src/Jardependence.jpg?raw=true" alt="JarDependence"><br>带依赖打包运行在2.7.1的hadoop集群即可</p>
+<h2 id="实验进展流程图："><a href="#实验进展流程图：" class="headerlink" title="实验进展流程图："></a>实验进展流程图：</h2><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Main   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Task1</td>
+<td>提取人名，清理无关文本（使用已提供的名字册）</td>
+</tr>
+<tr>
+<td>Task2</td>
+<td>人名同现统计</td>
+</tr>
+<tr>
+<td>Task3</td>
+<td>人物关系图构建与特征归一化</td>
+</tr>
+<tr>
+<td>Task4</td>
+<td>基于人物关系图的PageRank计算</td>
+</tr>
+<tr>
+<td>Task5</td>
+<td>数据分析：在人物关系图上的标签传播 并根据结果染色</td>
+</tr>
+<tr>
+<td>Task6</td>
+<td>分析结果整理</td>
+</tr>
+</tbody>
+</table>
+<h2 id="实现代码模块"><a href="#实现代码模块" class="headerlink" title="实现代码模块"></a>实现代码模块</h2><table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据预处理</td>
+<td>Task1-Task3 </td>
+</tr>
+<tr>
+<td>数据处理-PageRank</td>
+<td>Task4</td>
+</tr>
+<tr>
+<td>数据处理-LPA</td>
+<td>Task5</td>
+</tr>
+</tbody>
+</table>
+<h4 id="代码注解："><a href="#代码注解：" class="headerlink" title="代码注解："></a>代码注解：</h4><ol>
+<li><p>Txt2name:</p>
+<ul>
+<li>TransferTask.java: 实现数据与处理方面的mapreduce的job设置，同时将人名列表放入cache中，方便后续的读取。 </li>
+<li>TransferMapper.java: 完成自定义词典的配置，进行中文分词操作，提取出其中词性为Name的分词(在自定义词典时，将所有要提取的任务名称的词性均置为Name)，提取出人名同现键对，以此作为reducer函数的输入。其中<value,key>为输出，value为人名，key为与其同现过的人名。</value,key></li>
+<li>TransferReducer.java: 以mapper的输出键对作为输入，将同样的键值对进行合并输出类似于&lt;(a,b),time&gt;的键对,以a为主要人物,进行下一步的权重归一化操作，根据不同键值对出现次数的不同，计算权重，将输出格式设为”人名1  人名2：权重2，人名3：权重3……”，各权重值之和为1。</li>
+</ul>
+</li>
+<li><p>PageRank:</p>
+<ul>
+<li>PageRankDriver.java: 对外接口函数，可通过操作此函数来实现对其余功能的调用，并实现驱动多趟循环的功能</li>
+<li>GraphBuilder.java: 该java文件主要进行初始化操作，输入的<key,value>为&lt;文本行号，文本内容&gt;，对之进行处理，赋予初始的pr值输出为key：关系有向图节点人名，value:带pr值的从属人名</key,value></li>
+<li>PageRankIter.java: 此java文件包含了pagerank功能函数，，对初始化的pr的值进行迭代工作，参考书上内容后我们设置为迭代次数固定为30次，不对其进行是否收敛的判断以减少工作量。其中mapper函数的输入为上一轮迭代的输出,<key,value>中key为行号，value为每一行的内容，输出<key,value>中，key为人物名，value为更新后的pr值。将mapper的输出传入reducer函数中，输出新一轮迭代后的文件，格式为：”人名1  PR值 人名2:权重2，人名3:权重3,……”。</key,value></key,value></li>
+<li>PageRankViewer.java: 主要针对最后一次迭代的结果进行处理，调整其存储结构，只提取&lt;人名，pr值&gt;，将其输出到txt文件中，其中FinalRank中存储最后的PageRank结果。除此之外，在次函数中同时实现了对所有人名pr值的排序工作，将其从大到小一次排序。</li>
+</ul>
+</li>
+<li><p>TagVisual:</p>
+<ul>
+<li>LPADriver.java: 为对外接口函数，调用此函数可以完成对LPA算法的调用，同时为满足多次迭代操作，在其中设置for循环，实现多趟操作功能。</li>
+<li>GraphBuilder.java: 对分词后的输出结果进行处理，将其格式设置为：”人名1 Tag |人名2：权重2：Tag2，人名3：权重3：Tag3，……”，在初始化时每个人物的标签设置为其本身。</li>
+<li>LPA.java: 此文件实现了LPA算法，将上一次迭代的输出文件作为下一次的输入文件，根据权重调整人名1的Tag值，并将其传送给与其相关的人物，监督其也调整Tag值。</li>
+<li>TagViewer.java: 在LPADriver.java中设置迭代次数为10次,因此TagViewer.java的输入文件为LPA迭代十次后的输出文件。首先自定义一个map存储结构，选取14篇文章中的”主人公”,将其Tag置为1~14后存入map中。对输入文件进行提取工作,(人名，Label)，其中Label值为1~14。此Project主要为可视化操作提供文件输入。</li>
+</ul>
+</li>
+<li><p>Gephi:  </p>
+<ul>
+<li>针对1模块输出的txt用python处理得到边的csv，通过2，3模块得到的pr和lpa tag处理得到点的csv。导入后稍加调整即可获得所需图像</li>
+</ul>
+</li>
+</ol>
+<h2 id="具体模块内实现细节："><a href="#具体模块内实现细节：" class="headerlink" title="具体模块内实现细节："></a>具体模块内实现细节：</h2><ul>
+<li>Module1 没什么好说的，借助外部jar还是很好写的</li>
+<li>Module2 这部分的pagerank迭代参照书上MapReduce算法部分，结构相同，也没什么好说的，关键就是处理好map和reduce以及定义好处理的数据格式。实现上还需要注意pagerank的溢出和泄露问题，加个判断语句即可。</li>
+<li>Module3 这部分debug时间较长细节处会说</li>
+</ul>
+<h5 id="Module1"><a href="#Module1" class="headerlink" title="Module1:"></a>Module1:</h5><p>就不给出详细描述了，详见作业设计中<br>这里仅仅给出应有的输入输出的图片<br><img src="https://github.com/zyad86/JinYongArena/blob/master/wiki-src/pic/task1.png?raw=true" alt="Task1"><br><img src="https://github.com/zyad86/JinYongArena/blob/master/wiki-src/pic/task2.png?raw=true" alt="Task2"><br><img src="https://github.com/zyad86/JinYongArena/blob/master/wiki-src/pic/task3.png?raw=true" alt="Task3"><br>对于的处理结果可见处理的中间结果</p>
+<h5 id="Module2"><a href="#Module2" class="headerlink" title="Module2:"></a>Module2:</h5><p>PageRank算法部分：<br>注意预防Rank Sink和Rank Leak<br>针对这两个问题，我们采取将表达式变为<br>pagerank = (double) (1 - 0.8) + 0.8 * pagerank;这种形式可以避免以上的问题（可以说阻尼系数是0.8） </p>
+<ul>
+<li>一般来讲这个松弛系数取0.85，PRsum就是不同贡献值的和。最后，做一步清理工作，一是只保留人名和PageRank值，二是利用mapreduce自带的排序，将PageRank值作为主键，得到一个从高到低排序的人名表。<br>数据格式 ：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>数据格式 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Module1执行后的结果</td>
+<td>一灯大师    哑梢公:0.00234192037470726,鲁有脚:0.00936768149882904,杨康:0.00702576112412178,耶律燕:0…等 </td>
+</tr>
+<tr>
+<td>PageRank初始化</td>
+<td>一灯大师    1.0    哑梢公:0.00234192037470726,鲁有脚:0.00936768149882904,杨康:0.00702576112412178,耶律燕:…等 </td>
+</tr>
+<tr>
+<td>PageRank Mapper 给所有从属节点发出</td>
+<td>针对从属节点pagekey，value=weight*pr   </td>
+</tr>
+<tr>
+<td>PageRank Mapper 针对节点本身发出</td>
+<td>一灯大师    1.0     \</td>
+<td>哑梢公:0.00234192037470726,鲁有脚:0.00936768149882904,杨康:0.00702576112412178,耶律燕:…等</td>
+</tr>
+<tr>
+<td>PageRank Reduce</td>
+<td>接受处理以上的同一个key的数据，当遇到直接的节点，权值，通过阻尼系数计算后的pagerank值相加，用于更新这个key的新的pr值，而加上\</td>
+<td>标识符号的串作为下一轮开始的初始串。</td>
+</tr>
+</tbody>
+</table>
+<p>我们在这里一共迭代了30次（实际上15次基本就稳定了）</p>
+<h5 id="Module3"><a href="#Module3" class="headerlink" title="Module3"></a>Module3</h5><p>这个部分本来不应该有什么问题的，实际上却遇到了一个很严重的问题   </p>
+<p>这部分的算法基本参照Wayne1234他们的，我认为他们描述的比较好：</p>
+<ul>
+<li>标签传播（Label Propagation）是一种半监督的图分析算法，他能为图上的顶点打标签，进行图顶点的聚类分析，从而在一张类似社交网络图中完成社区发现（Community Detection）。该任务中，我们用每个聚类的核心人物作为这个类的标签，比如下面输出中，“张无忌”实际上是一个标签名，表示“杨逍”属于张无忌这个类。</li>
+<li><p>实现思路： LPA需要迭代，因此我们采用了和PageRank差不多的方式做了初始化，初始化文件的格式如下：</p>
+<blockquote>
+<p>一灯大师    一灯大师&amp;乔寨主,0.0022988506,乔寨主;华筝,0.0022988506,华筝;……</p>
+</blockquote>
+</li>
+<li><p>这里，“一灯大师”是key，value中，“&amp;”前面的“一灯大师”表示key对应的标签，我们的初始化标签均和自己相同。后面，“乔寨主”是人名，中间数字是它的权重，后一个“乔寨主”是它的标签，在迭代的时候我们会更新这个标签，这里初始化的时候使用的是自己的名字。迭代过程中最关键的是如何选取新的标签，遍历“&amp;”后面的“人名，权值，标签”列表，我们要统计出那个贡献值最高的标签。举例：</p>
+</li>
+</ul>
+<blockquote>
+<p>一灯大师    一灯大师&amp;乔寨主,0.0022988506,乔寨主;华筝,0.0022988506,华筝;……</p>
+</blockquote>
+<ul>
+<li>假设我们现在正在统计的就是这一行数据，在解析“&amp;”后面的字符串时，除了第一次迭代之外，会出现多个人对应同一个标签的情况，因此需要一个数组来存储每个标签在当前字符串中的总权值，如果该标签还没出现，那把该标签新家进去，该标签的权值作为总权值的一个初值。比如说现在的这个数组是空的，我发现“乔寨主”的标签是“乔寨主”，那么这个数组里就应该添加一条记录：“乔寨主”这个标签的当前权值是0.00229…，后面还有“乔寨主”的话，直接用那个权值加上当前的“乔寨主”的总权值即可。我们还需要一个数组记录下这整个字符串中的所有人名，这个后面会用到。现在我们已经有了一组“标签，权重”的记录，因此从中挑选权重最高的作为key的标签就可以了，注意输出到reduce的时候，为了保持迭代时文件格式一致，应当将这个长字符串一起发送给reduce。我们还有一件事要做，告诉所有和当前key相关的其他key，当前key对应的标签变了，所以我们输出遍历之前记录了整个字符串中所有人名的数组，以单个人名为key，将更新过的当前的key和标签作为value也输出到reduce以供reduce更新。Reduce过程做的工作就是更新长字符串中的标签，最后按照统一格式写到文件。最后还有一步清理工作，只保留标签和人名输出一个最终文件即可。</li>
+</ul>
+<h3 id="这个地方的严重BUG"><a href="#这个地方的严重BUG" class="headerlink" title="这个地方的严重BUG"></a>这个地方的严重BUG</h3><p>“有些人走着走着就散了”，在我们第一个版本的LPA迭代，一轮迭代后，1283行剩下了1178行，很多影响力大的人物后面的后缀加起来都没有1，很是奇怪。看了下我们的代码认为实现没有问题</p>
+<p>先说说我们定义的数据格式在Map和Reduce阶段的变化：</p>
+<ul>
+<li>Mapper：  主串  Key  newLabel | lineAfterKey(即原有从属权值信息等)</li>
+<li>Mapper：  通知更改串  Keylink &amp; key : newLabel  其中keylink为从属人物 key为主标签 （这里其实有没有更新都会发送更改信息的）</li>
+<li>Reduce：  拿下主串，记录下原有从属权值信息</li>
+<li>Reduce：  根据通知更改串，更改标签为最新标签</li>
+</ul>
+<p>详细的执行方式和上面描写的是一致的，而特别的识别符也是&amp;<br>后面DeBug修改的是Reduce阶段的一个策略</p>
+<p>初始的策略是：<br>Reduce阶段，首先取最长的那个基础串，记录下他们的权值（用hash记录）（因为另一种更新串的数据格式是 [ key &amp; 原有key 已更改的新标签] 采取的被动更新，就是遍历reduce发过来的所有串，解析到&amp;就更新一个新的子节点加进去。<br>结果就是有的人走着走着就散了，几次迭代过后就没数据了。</p>
+<p>后期修改的策略：<br>Reduce阶段，首先取最长的那个基础串，记录下他们的权值（用hash记录）（因为另一种更新串的数据格式是 [ key &amp; 原有key 已更改的新标签] 采取的主动更新，遍历主串的从属串，从解析到&amp;的字符串中更新标签。这样就保证了一个都不会少</p>
+<p>现在能确保得到结果可是任然不知道初始策略错在了哪里<br><strong>这边的问题其实到现在还没想清楚，知道为什么的麻烦在issue中告知</strong></p>
+<h4 id="Gephi部分的处理"><a href="#Gephi部分的处理" class="headerlink" title="Gephi部分的处理"></a>Gephi部分的处理</h4><p>起初在lpa标签传播阶段没有分类的，只是把最后每个人对应的标签打印处理，通过一个简单的python程序统计下一共多少种，之后给它分类到各个作品里，再写一个函数重新跑一标签使自动对应作品标号  </p>
+<p>Gephi需要的边和点的数据也不是很困难，通过python可以轻松的处理，关键是Gephi显示的数据有些迷，之前有几次一直把标签当做了主要的区别符号输出，导致了一大片一大片的标签名散在上面。后来调整里几下就好了</p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>Gephi总体结果:<br><img src="https://github.com/zyad86/JinYongArena/blob/master/wiki-src/Gephi-allFigure.jpg?raw=true" alt="GephiAll"></p>
+<p>更换参数获得的新聚类图: 说明我们的标签传播算法还是准确的<br><img src="https://github.com/zyad86/JinYongArena/blob/master/wiki-src/Gephi-AnotherOverall.jpg?raw=true" alt="Gephi-AnotherOverall"></p>
+<p>主要角色：<br><img src="https://github.com/zyad86/JinYongArena/blob/master/wiki-src/Gephi-MainChara.jpg?raw=true" alt="Gephi-MainChara"></p>
+<p>一些局部图 鹿鼎记<br><img src="https://github.com/zyad86/JinYongArena/blob/master/wiki-src/Gephi-Ludingji.jpg?raw=true" alt="Gephi-Ludingji"></p>
+<p>神雕侠侣<br><img src="https://github.com/zyad86/JinYongArena/blob/master/wiki-src/Gephi-Shediao.jpg?raw=true" alt="Gephi-Shediao"></p>
+<p>神雕侠侣和射雕英雄传的交界处<br><img src="https://github.com/zyad86/JinYongArena/blob/master/wiki-src/Gephi-ShediaoJiaoShendiao.jpg?raw=true" alt="Gephi-ShediaoJiaoShendiao"></p>
+<p>图中一些连接处  这边可以看出没有了其实应该占比较高的说不得什么的，因为在模块一中考虑了这一点特殊处理了一些只在某些作品中有意义的人物名<br><img src="https://github.com/zyad86/JinYongArena/blob/master/wiki-src/Gephi-Connector.jpg?raw=true" alt="Gephi-Connector.jpg"></p>
+<p>更多细节可以参见Gephi文件夹中的gephi文件</p>
+<h3 id="优化与总结"><a href="#优化与总结" class="headerlink" title="优化与总结"></a>优化与总结</h3><ol>
+<li>在分词部分，主要时间花在了外部依赖jar包的调整上，由于没有找到助教推荐的版本，采用了最新的版本，但在最新版本中，ansj_seg的函数接口与原版的略有不同。从最后的分词结果来看，可以认为此次实验中的分词工作基本完成，对人物权重进行归一化处理后，文件结构较为清晰，为之后的功能提供了一个较好的输入。</li>
+<li>起初在人物中没有删除说不得等可变成常用语句的角色名，导致大汉、汉子、说不得这类词本来在某部作品中的人物可能到处出现，后来发现还有“农妇”，“胖妇人”“哑巴这种”，妥善的处理方式我认为是在之前加上作品前缀，就不会有滑稽的相关联了，因为这种角色名不可能是连着几部作品的。 </li>
+<li>LPA标签传播部分遇到过一个很大的问题，错误处在第一次迭代上，初始化结束之后，第一轮迭代结果人物剩下了1180几个，而原来1283个，真的是“有些人走着走着就散了”，肯定是reduce出了问题，当时的策略是：map阶段，更新节点标签，同时产生一个通知所有相关节点的数据，在reduce阶段，遍历通知节点添加后缀产生新的字符串。这是一个被动的方式，到了凌晨3点多想到了解决方法，主动更新，也就是我们记录下所有的后缀，遍历后缀匹配，强制更新每个后缀的标签吗，这样果然就没有人散了。</li>
+<li>大数据集群的运行状态资源分布有时候也会影响运行结果，举个例子，15号凌晨的时候有两个小组和我们一起跑，结果那次运行跑挂了，我们认为是代码问题，改了半天没发现错误，再次跑一遍就是正确的。</li>
+<li>本次的结果优化，由于做实验起初就看到了比较好的方案，所以也没自己优化，要是编个起初怎么样，后期怎么样也没意思。集群的性能还是很强大的，我们的程序只有map和reduce，如果进一步优化其实可以再谢谢partition之类的？不过不影响最后结果。</li>
+</ol>
+<h3 id="Contributer"><a href="#Contributer" class="headerlink" title="Contributer:"></a>Contributer:</h3><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Task       </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ericyz</td>
+<td>组长，主要完成LPA部分Debug，数据可视化处理，实验报告总结，Github编写Wiki。 </td>
+</tr>
+<tr>
+<td>你爱上的我</td>
+<td>主要完成PageRank–MapReduce算法设计，LPA-MapReduce算法设计。  </td>
+</tr>
+<tr>
+<td>MissAngel</td>
+<td>主要完成小说中文分词功能，LPA部分Debug，实验报告撰写。  </td>
+</tr>
+<tr>
+<td>福克斯四世</td>
+<td>主要完成小说中文分词功能，实验报告完善，jar包编译调试。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h3><blockquote>
+<p><a href="https://github.com/Wayne1234/Jinyong-Novels-Analysis" target="_blank" rel="external">金庸的江湖，人物关系分析   Jinyong-Novels-Analysis -Wayne1234  标签算法部分描述很好</a><br><a href="https://github.com/sunfvrise/MapReduce-JinYongsWorld" target="_blank" rel="external">基于15本金庸小说的人物关系图挖掘  MapReduce-JinYongsWorld  -sunfvrise 代码框架结构很好 分成三个模块</a><br>《深入理解大数据》机械工业出版社，黄宜华，苗凯翔<br><a href="http://www.cnphp6.com/archives/24136" target="_blank" rel="external">PIG标签传播算法和超级英雄们的社区发现</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://zyad86.g  ithub.io/2017/07/22/YetAnotherDownloadingMethod/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -358,128 +689,6 @@ youtube-dl -f xxx+xxx URL
 <p>Reference:<br><a href="http://www.jianshu.com/p/a3f8df948395" target="_blank" rel="external">You-Get——基于Python3的媒体下载工具-Login926</a><br><a href="https://lolicon.link/2016/08/07/yet-another-method-to-download-video-from-bilibili/" target="_blank" rel="external">一种批量下载Bilibili视频的方法-SyDylan</a><br>//作者取名的方式很有意思 很像yacc这类啊   </p>
 </blockquote>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://zyad86.g  ithub.io/2017/05/09/Hbase-install-configuration/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ericyz-zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zyad86-Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/09/Hbase-install-configuration/" itemprop="url">
-                  Hbase install & configuration
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T15:37:46+08:00">
-                2017-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Hbase-安装配置"><a href="#Hbase-安装配置" class="headerlink" title="Hbase 安装配置"></a>Hbase 安装配置</h1><blockquote>
-<p>原先配置环境  hadoop 2.7.3  redhat 7.3</p>
-</blockquote>
-<h2 id="1-Hbase单机配置"><a href="#1-Hbase单机配置" class="headerlink" title="1. Hbase单机配置"></a>1. Hbase单机配置</h2>
           
         
       
@@ -1053,7 +1262,7 @@ cat ./output/*
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
